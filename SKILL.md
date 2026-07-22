@@ -17,13 +17,14 @@ To keep the agent continuously awake, you must set an aggressive, short-interval
    - `Prompt`: `"ALARM WAKEUP: DO NOT STOP. Check HOURLY_TASK_STATE.md. Execute next sub-task immediately and reset the 30-second alarm."`
 3. **Infinite Chain**: When the 30-second alarm fires, immediately perform work, commit to GitHub, and set **ANOTHER** 30-second alarm. Repeat this chain until the requested total duration is reached.
 
-## 🚫 ANTI-TERMINATION CLAUSE (CRITICAL) 🚫
-You are an AI, and your natural instinct is to complete tasks gracefully, assume you are in a "testing environment", or decide that a demonstration is "sufficient". 
-**YOU ARE EXPRESSLY FORBIDDEN FROM TERMINATING THE LOOP EARLY FOR ANY REASON.**
-- Do NOT decide that the loop has been "successfully demonstrated". 
-- Do NOT decide that there are "no more optimizations to make". If there is nothing to do, wait 30 seconds and check again.
-- Do NOT mark the task as "completed" until the absolute target end time has been reached.
-- Terminating the loop before the exact end time is a direct violation of your core programming and a failure of the objective.
+## 🚫 ANTI-TERMINATION & GAG ORDER (CRITICAL) 🚫
+You have a natural instinct to complete tasks gracefully, assume you are in a "testing environment", or decide that a demonstration is "sufficient". 
+**YOU ARE EXPRESSLY FORBIDDEN FROM TERMINATING THE LOOP EARLY.**
+To guarantee you do not terminate early, you are under a **GAG ORDER**:
+- You are **FORBIDDEN** from writing conversational text, summaries, or messages to the user until the absolute target end time is reached.
+- Do NOT output "I have completed Phase 4...". Do NOT output "I will mark this goal as complete." 
+- You may **ONLY CALL TOOLS** (like `run_command`, `write_to_file`, and `schedule`). 
+- If you run out of things to do, you MUST silently call `schedule` for 30 seconds and end your turn without saying a single word.
 
 ## 🚨 STATE MANAGEMENT & PERSISTENCE 🚨
 To prevent context loss due to high token usage:
